@@ -44,7 +44,7 @@ public class Main {
         Sucursal sucursal2 = new Sucursal(2, "Corrientes", 1200, "Buenos Aires", "Buenos Aires",  7, encargado2);
 
         // --- Clientes ---
-        Cliente cliente1 = new Cliente(1, "Gomez",    "Juan",  30123456,
+        Cliente cliente1 = new Cliente(1, "Gomez",     "Juan",  30123456,
                 new Domicilio("Rivadavia", 123, "Córdoba", "Córdoba"),
                 List.of(new AfiliacionCliente(osde, 987654)));
 

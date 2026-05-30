@@ -133,7 +133,7 @@
     "idVenta": 2,
     "fecha": "2026-05-11",
     "nroTicket": 1002,
-    "total": 3600.0,
+    "total": 2090.0,
     "formaPago": "TARJETA_DEBITO",
     "cliente": {
       "idCliente": 2,
@@ -152,12 +152,6 @@
             "nombre": "IOMA"
           },
           "nroAfiliado": 654321
-        },
-        {
-          "obraSocial": {
-            "nombre": "Swiss Medical"
-          },
-          "nroAfiliado": 112233
         }
       ]
     },
@@ -244,27 +238,12 @@
             "nombre": "Bayer"
           }
         },
-        "cantidad": 2,
+        "cantidad": 1,
         "precioUnitario": 850.0,
-        "totalProducto": 1700.0
+        "totalProducto": 850.0
       },
       {
         "idDetalleVenta": 4,
-        "producto": {
-          "codigo": 3,
-          "tipo": "MEDICAMENTO",
-          "descripcion": "Amoxicilina 500mg",
-          "precio": 1200.0,
-          "laboratorio": {
-            "nombre": "Roemmers"
-          }
-        },
-        "cantidad": 1,
-        "precioUnitario": 1200.0,
-        "totalProducto": 1200.0
-      },
-      {
-        "idDetalleVenta": 5,
         "producto": {
           "codigo": 2,
           "tipo": "MEDICAMENTO",
@@ -274,9 +253,9 @@
             "nombre": "Genfar"
           }
         },
-        "cantidad": 1,
+        "cantidad": 2,
         "precioUnitario": 620.0,
-        "totalProducto": 620.0
+        "totalProducto": 1240.0
       }
     ]
   },
@@ -284,7 +263,7 @@
     "idVenta": 3,
     "fecha": "2026-05-12",
     "nroTicket": 1003,
-    "total": 2400.0,
+    "total": 1240.0,
     "formaPago": "OBRA_SOCIAL",
     "cliente": {
       "idCliente": 1,
@@ -328,7 +307,7 @@
         "afiliaciones": [
           {
             "obraSocial": {
-              "nombre": "Swiss Medical"
+              "nombre": "IOMA"
             },
             "nroAfiliado": 555666
           }
@@ -336,62 +315,62 @@
       }
     },
     "empleadoAtencion": {
-      "idEmpleado": 4,
-      "apellido": "Díaz",
-      "nombre": "Ana",
-      "dni": 32000004,
-      "cuil": 27320000044,
+      "idEmpleado": 3,
+      "apellido": "López",
+      "nombre": "María",
+      "dni": 30000003,
+      "cuil": 27300000033,
       "domicilio": {
-        "calle": "Rivadavia",
-        "numero": 890,
+        "calle": "Belgrano",
+        "numero": 120,
         "localidad": "Buenos Aires",
         "provincia": "Buenos Aires"
       },
       "afiliaciones": [
         {
           "obraSocial": {
-            "nombre": "OSDE"
+            "nombre": "IOMA"
           },
-          "nroAfiliado": 777888
+          "nroAfiliado": 555666
         }
       ]
     },
     "empleadoCobro": {
-      "idEmpleado": 4,
-      "apellido": "Díaz",
-      "nombre": "Ana",
-      "dni": 32000004,
-      "cuil": 27320000044,
+      "idEmpleado": 3,
+      "apellido": "López",
+      "nombre": "María",
+      "dni": 30000003,
+      "cuil": 27300000033,
       "domicilio": {
-        "calle": "Rivadavia",
-        "numero": 890,
+        "calle": "Belgrano",
+        "numero": 120,
         "localidad": "Buenos Aires",
         "provincia": "Buenos Aires"
       },
       "afiliaciones": [
         {
           "obraSocial": {
-            "nombre": "OSDE"
+            "nombre": "IOMA"
           },
-          "nroAfiliado": 777888
+          "nroAfiliado": 555666
         }
       ]
     },
     "detalle": [
       {
-        "idDetalleVenta": 6,
+        "idDetalleVenta": 5,
         "producto": {
-          "codigo": 3,
+          "codigo": 2,
           "tipo": "MEDICAMENTO",
-          "descripcion": "Amoxicilina 500mg",
-          "precio": 1200.0,
+          "descripcion": "Paracetamol 500mg",
+          "precio": 620.0,
           "laboratorio": {
-            "nombre": "Roemmers"
+            "nombre": "Genfar"
           }
         },
         "cantidad": 2,
-        "precioUnitario": 1200.0,
-        "totalProducto": 2400.0
+        "precioUnitario": 620.0,
+        "totalProducto": 1240.0
       }
     ]
   },
@@ -399,20 +378,27 @@
     "idVenta": 4,
     "fecha": "2026-05-13",
     "nroTicket": 1004,
-    "total": 1240.0,
-    "formaPago": "EFECTIVO",
+    "total": 850.0,
+    "formaPago": "TARJETA_CREDITO",
     "cliente": {
-      "idCliente": 3,
-      "apellido": "Torres",
-      "nombre": "Marcos",
-      "dni": 28765432,
+      "idCliente": 2,
+      "apellido": "Fernández",
+      "nombre": "Laura",
+      "dni": 35987654,
       "domicilio": {
-        "calle": "Moreno",
-        "numero": 789,
-        "localidad": "Rosario",
-        "provincia": "Santa Fe"
+        "calle": "Mitre",
+        "numero": 456,
+        "localidad": "Buenos Aires",
+        "provincia": "Buenos Aires"
       },
-      "afiliaciones": []
+      "afiliaciones": [
+        {
+          "obraSocial": {
+            "nombre": "IOMA"
+          },
+          "nroAfiliado": 654321
+        }
+      ]
     },
     "sucursal": {
       "idSucursal": 2,
@@ -436,7 +422,7 @@
         "afiliaciones": [
           {
             "obraSocial": {
-              "nombre": "Swiss Medical"
+              "nombre": "IOMA"
             },
             "nroAfiliado": 555666
           }
@@ -444,171 +430,50 @@
       }
     },
     "empleadoAtencion": {
-      "idEmpleado": 4,
-      "apellido": "Díaz",
-      "nombre": "Ana",
-      "dni": 32000004,
-      "cuil": 27320000044,
+      "idEmpleado": 3,
+      "apellido": "López",
+      "nombre": "María",
+      "dni": 30000003,
+      "cuil": 27300000033,
       "domicilio": {
-        "calle": "Rivadavia",
-        "numero": 890,
+        "calle": "Belgrano",
+        "numero": 120,
         "localidad": "Buenos Aires",
         "provincia": "Buenos Aires"
       },
       "afiliaciones": [
         {
           "obraSocial": {
-            "nombre": "OSDE"
+            "nombre": "IOMA"
           },
-          "nroAfiliado": 777888
+          "nroAfiliado": 555666
         }
       ]
     },
     "empleadoCobro": {
-      "idEmpleado": 4,
-      "apellido": "Díaz",
-      "nombre": "Ana",
-      "dni": 32000004,
-      "cuil": 27320000044,
+      "idEmpleado": 3,
+      "apellido": "López",
+      "nombre": "María",
+      "dni": 30000003,
+      "cuil": 27300000033,
       "domicilio": {
-        "calle": "Rivadavia",
-        "numero": 890,
+        "calle": "Belgrano",
+        "numero": 120,
         "localidad": "Buenos Aires",
         "provincia": "Buenos Aires"
       },
       "afiliaciones": [
         {
           "obraSocial": {
-            "nombre": "OSDE"
+            "nombre": "IOMA"
           },
-          "nroAfiliado": 777888
+          "nroAfiliado": 555666
         }
       ]
     },
     "detalle": [
       {
-        "idDetalleVenta": 7,
-        "producto": {
-          "codigo": 2,
-          "tipo": "MEDICAMENTO",
-          "descripcion": "Paracetamol 500mg",
-          "precio": 620.0,
-          "laboratorio": {
-            "nombre": "Genfar"
-          }
-        },
-        "cantidad": 2,
-        "precioUnitario": 620.0,
-        "totalProducto": 1240.0
-      }
-    ]
-  },
-  {
-    "idVenta": 5,
-    "fecha": "2026-05-14",
-    "nroTicket": 1005,
-    "total": 850.0,
-    "formaPago": "TARJETA_CREDITO",
-    "cliente": {
-      "idCliente": 2,
-      "apellido": "Fernández",
-      "nombre": "Laura",
-      "dni": 35987654,
-      "domicilio": {
-        "calle": "Mitre",
-        "numero": 456,
-        "localidad": "Buenos Aires",
-        "provincia": "Buenos Aires"
-      },
-      "afiliaciones": [
-        {
-          "obraSocial": {
-            "nombre": "IOMA"
-          },
-          "nroAfiliado": 654321
-        },
-        {
-          "obraSocial": {
-            "nombre": "Swiss Medical"
-          },
-          "nroAfiliado": 112233
-        }
-      ]
-    },
-    "sucursal": {
-      "idSucursal": 1,
-      "calle": "San Martín",
-      "numero": 500,
-      "localidad": "Córdoba",
-      "provincia": "Córdoba",
-      "puntoDeVenta": 3,
-      "encargado": {
-        "idEmpleado": 1,
-        "apellido": "García",
-        "nombre": "Roberto",
-        "dni": 25000001,
-        "cuil": 20250000011,
-        "domicilio": {
-          "calle": "San Martín",
-          "numero": 450,
-          "localidad": "Córdoba",
-          "provincia": "Córdoba"
-        },
-        "afiliaciones": [
-          {
-            "obraSocial": {
-              "nombre": "OSDE"
-            },
-            "nroAfiliado": 111222
-          }
-        ]
-      }
-    },
-    "empleadoAtencion": {
-      "idEmpleado": 2,
-      "apellido": "Pérez",
-      "nombre": "Carlos",
-      "dni": 28000002,
-      "cuil": 20280000022,
-      "domicilio": {
-        "calle": "Colón",
-        "numero": 300,
-        "localidad": "Córdoba",
-        "provincia": "Córdoba"
-      },
-      "afiliaciones": [
-        {
-          "obraSocial": {
-            "nombre": "IOMA"
-          },
-          "nroAfiliado": 333444
-        }
-      ]
-    },
-    "empleadoCobro": {
-      "idEmpleado": 2,
-      "apellido": "Pérez",
-      "nombre": "Carlos",
-      "dni": 28000002,
-      "cuil": 20280000022,
-      "domicilio": {
-        "calle": "Colón",
-        "numero": 300,
-        "localidad": "Córdoba",
-        "provincia": "Córdoba"
-      },
-      "afiliaciones": [
-        {
-          "obraSocial": {
-            "nombre": "IOMA"
-          },
-          "nroAfiliado": 333444
-        }
-      ]
-    },
-    "detalle": [
-      {
-        "idDetalleVenta": 8,
+        "idDetalleVenta": 6,
         "producto": {
           "codigo": 1,
           "tipo": "MEDICAMENTO",
