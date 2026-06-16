@@ -1,12 +1,23 @@
 package farmacia;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import farmacia.model.*;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import farmacia.model.AfiliacionCliente;
+import farmacia.model.AfiliacionEmpleado;
+import farmacia.model.Cliente;
+import farmacia.model.DetalleVenta;
+import farmacia.model.Domicilio;
+import farmacia.model.Empleado;
+import farmacia.model.Laboratorio;
+import farmacia.model.ObraSocial;
+import farmacia.model.Producto;
+import farmacia.model.Sucursal;
+import farmacia.model.Venta;
 
 public class Main {
 
@@ -21,8 +32,6 @@ public class Main {
         Laboratorio genfar = new Laboratorio("Genfar");
 
         // --- Productos
-        // Estos mismos objetos van a quedar EMBEBIDOS en múltiples ventas,
-        // haciendo visible la desnormalización: sus datos se repiten en cada DetalleVenta.
         Producto ibuprofeno  = new Producto(1, "MEDICAMENTO", "Ibuprofeno 400mg",  850.0, bayer);
         Producto paracetamol = new Producto(2, "MEDICAMENTO", "Paracetamol 500mg", 620.0, genfar);
 
@@ -52,9 +61,6 @@ public class Main {
                 new Domicilio("Mitre", 456, "Buenos Aires", "Buenos Aires"),
                 List.of(new AfiliacionCliente(ioma, 654321)));
 
-        // --- Ventas (documento raíz desnormalizado) ---
-        // Notar que ibuprofeno y paracetamol aparecen con todos sus datos
-        // repetidos en distintas ventas: esa redundancia es la esencia de la desnormalización.
         List<Venta> ventas = List.of(
 
             new Venta(1, "2026-05-10", 1001, 2320.0, "EFECTIVO",

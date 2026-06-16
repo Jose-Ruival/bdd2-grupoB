@@ -1,0 +1,4 @@
+target/
+ventas.json
+.env
+.vscode/launch.json
