@@ -53,11 +53,22 @@ public class Consultas {
             System.out.println("PERÍODO: " + desde + " → " + hasta);
             System.out.println("=".repeat(60));
 
+            System.out.println("\n" + "#".repeat(60));
+            System.out.println("# CONSULTA 1: Detalle y totales de ventas,");
+            System.out.println("#             cadena completa y por sucursal, entre fechas");
+            System.out.println("#".repeat(60));
             detalleVentas(col, desde, hasta);
             totalesPorCadena(col, desde, hasta);
             totalesPorSucursal(col, desde, hasta);
+
             ventasPorTipoCliente(col, desde, hasta);
+
+            System.out.println("\n" + "#".repeat(60));
+            System.out.println("# CONSULTA 4: Detalle y totales de ventas de productos,");
+            System.out.println("#             cadena y sucursal, diferenciados farmacia/perfumería");
+            System.out.println("#".repeat(60));
             ventasPorCategoria(col, desde, hasta);
+
             reporteCobranza(col, desde, hasta);
 
             rankingPorMonto(col, desde, hasta);
@@ -70,7 +81,7 @@ public class Consultas {
     }
 
     static void detalleVentas(MongoCollection<Document> col, String desde, String hasta) {
-        System.out.println("\n── DETALLE DE VENTAS ──────────────────────────────────");
+        System.out.println("\n── [CONSULTA 1] DETALLE DE VENTAS ─────────────────────");
 
         Bson filtro = and(gte("fecha", desde), lte("fecha", hasta));
 
@@ -99,7 +110,7 @@ public class Consultas {
     }
 
     static void totalesPorCadena(MongoCollection<Document> col, String desde, String hasta) {
-        System.out.println("\n── TOTAL CADENA COMPLETA ──────────────────────────────");
+        System.out.println("\n── [CONSULTA 1] TOTAL CADENA COMPLETA ─────────────────");
 
         List<Bson> pipeline = Arrays.asList(
                 match(and(gte("fecha", desde), lte("fecha", hasta))),
@@ -198,7 +209,7 @@ public class Consultas {
     }
 
     static void ventasPorCategoria(MongoCollection<Document> col, String desde, String hasta) {
-        System.out.println("\n── VENTAS POR CATEGORÍA (FARMACIA / PERFUMERÍA) ───────────");
+        System.out.println("\n── [CONSULTA 4] VENTAS POR CATEGORÍA (FARMACIA / PERFUMERÍA) ──");
 
         Bson filtroFecha = and(gte("fecha", desde), lte("fecha", hasta));
 
@@ -328,7 +339,7 @@ public class Consultas {
     }
 
     static void totalesPorSucursal(MongoCollection<Document> col, String desde, String hasta) {
-        System.out.println("\n── TOTALES POR SUCURSAL ───────────────────────────────");
+        System.out.println("\n── [CONSULTA 1] TOTALES POR SUCURSAL ──────────────────");
 
         List<Bson> pipeline = Arrays.asList(
                 match(and(gte("fecha", desde), lte("fecha", hasta))),
@@ -420,8 +431,11 @@ public class Consultas {
 
         for (Document doc : col.aggregate(pipelineSucursal)) {
             Document id = (Document) doc.get("_id");
-            System.out.printf("     Sucursal %d | %-20s | %d unid.%n", 
+            System.out.printf("     Sucursal %d | %-20s | %d unid.%n",
                 id.getInteger("idSucursal"), id.getString("producto"), doc.getInteger("cantidadTotal"));
+        }
+    }
+
     static void rankingClientesCadenaPorMonto(MongoCollection<Document> col, String desde, String hasta) {
         System.out.println("\n── RANKING DE CLIENTES POR MONTO (CADENA COMPLETA) ──────────────");
 
@@ -501,7 +515,7 @@ public class Consultas {
                         first("apellido", "$cliente.apellido"),
                         sum("montoTotal", "$total"),
                         sum("cantidadCompras", 1)),
-                sort(descending("montoTotal")));
+                sort(descending("cantidadCompras")));
 
         int puesto = 1;
 
