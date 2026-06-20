@@ -43,6 +43,7 @@ public class Consultas {
 
         try (MongoClient client = MongoClients.create(URI)) {
             MongoDatabase db = client.getDatabase("farmacia");
+            System.out.println("✅ ¡Conexión exitosa a MongoDB Atlas confirmada!");
             MongoCollection<Document> col = db.getCollection("ventas");
 
             System.out.println("=".repeat(60));
@@ -52,6 +53,9 @@ public class Consultas {
             detalleVentas(col, desde, hasta);
             totalesPorCadena(col, desde, hasta);
             totalesPorSucursal(col, desde, hasta);
+
+            rankingPorMonto(col, desde, hasta);
+            rankingPorCantidad(col, desde, hasta);
             rankingClientesCadenaPorMonto(col, desde, hasta);
             rankingClientesSucursalPorMonto(col, desde, hasta);
             rankingClientesCadenaPorCantidadCompras(col, desde, hasta);
@@ -130,6 +134,77 @@ public class Consultas {
         }
     }
 
+    static void rankingPorMonto(MongoCollection<Document> col, String desde, String hasta) {
+        System.out.println("\n── 5. RANKING DE PRODUCTOS POR MONTO VENDIDO ──────────────────");
+
+        // 5A: Total de la cadena completa
+        System.out.println("\n  >> Total Cadena Completa:");
+        List<Bson> pipelineCadena = Arrays.asList(
+            match(and(gte("fecha", desde), lte("fecha", hasta))),
+            unwind("$detalle"),
+            group("$detalle.producto.descripcion",
+                sum("montoTotal", "$detalle.totalProducto")
+            ),
+            sort(descending("montoTotal"))
+        );
+
+        for (Document doc : col.aggregate(pipelineCadena)) {
+            System.out.printf("     %-25s | $%.2f%n", doc.getString("_id"), doc.getDouble("montoTotal"));
+        }
+
+        // 5B: Agrupado por Sucursal
+        System.out.println("\n  >> Por Sucursal:");
+        List<Bson> pipelineSucursal = Arrays.asList(
+            match(and(gte("fecha", desde), lte("fecha", hasta))),
+            unwind("$detalle"),
+            // Agrupamos por un objeto compuesto: {idSucursal, producto}
+            group(new Document("idSucursal", "$sucursal.idSucursal").append("producto", "$detalle.producto.descripcion"),
+                sum("montoTotal", "$detalle.totalProducto")
+            ),
+            // Ordenamos por sucursal (ascendente) y luego por monto (descendente)
+            sort(new Document("_id.idSucursal", 1).append("montoTotal", -1))
+        );
+
+        for (Document doc : col.aggregate(pipelineSucursal)) {
+            Document id = (Document) doc.get("_id");
+            System.out.printf("     Sucursal %d | %-20s | $%.2f%n", 
+                id.getInteger("idSucursal"), id.getString("producto"), doc.getDouble("montoTotal"));
+        }
+    }
+
+    static void rankingPorCantidad(MongoCollection<Document> col, String desde, String hasta) {
+        System.out.println("\n── 6. RANKING DE PRODUCTOS POR CANTIDAD VENDIDA ───────────────");
+
+        // 6A: Total de la cadena completa
+        System.out.println("\n  >> Total Cadena Completa:");
+        List<Bson> pipelineCadena = Arrays.asList(
+            match(and(gte("fecha", desde), lte("fecha", hasta))),
+            unwind("$detalle"),
+            group("$detalle.producto.descripcion",
+                sum("cantidadTotal", "$detalle.cantidad")
+            ),
+            sort(descending("cantidadTotal"))
+        );
+
+        for (Document doc : col.aggregate(pipelineCadena)) {
+            System.out.printf("     %-25s | %d unid.%n", doc.getString("_id"), doc.getInteger("cantidadTotal"));
+        }
+
+        // 6B: Agrupado por Sucursal
+        System.out.println("\n  >> Por Sucursal:");
+        List<Bson> pipelineSucursal = Arrays.asList(
+            match(and(gte("fecha", desde), lte("fecha", hasta))),
+            unwind("$detalle"),
+            group(new Document("idSucursal", "$sucursal.idSucursal").append("producto", "$detalle.producto.descripcion"),
+                sum("cantidadTotal", "$detalle.cantidad")
+            ),
+            sort(new Document("_id.idSucursal", 1).append("cantidadTotal", -1))
+        );
+
+        for (Document doc : col.aggregate(pipelineSucursal)) {
+            Document id = (Document) doc.get("_id");
+            System.out.printf("     Sucursal %d | %-20s | %d unid.%n", 
+                id.getInteger("idSucursal"), id.getString("producto"), doc.getInteger("cantidadTotal"));
     static void rankingClientesCadenaPorMonto(MongoCollection<Document> col, String desde, String hasta) {
         System.out.println("\n── RANKING DE CLIENTES POR MONTO (CADENA COMPLETA) ──────────────");
 
